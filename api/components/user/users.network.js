@@ -43,9 +43,9 @@ async function postUser(req,res,next){
 
 async function getAll(req, res, next){
     try {
-        const users = await usersController.getAll();
-        const responseStructure = response.success(null, 200, 'successful request', users);
-        res.json(responseStructure);
+        // const users = await usersController.getAll();
+        // const responseStructure = response.success(null, 200, 'successful request', users);
+        res.json({message:'successful get request'});
     } catch (error) {
         next(error);
     }
