@@ -1,0 +1,215 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "social network.",
+    "description": "local server for my social network project",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v1"
+    },
+    {
+      "url": "set url here"
+    }
+  ],
+  "tags": [
+    {
+      "name": "users",
+      "description": "all about users."
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "post a new user",
+        "description": "use this endpoint to create a new user in the database",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/token"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/bodyUserPost"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "(OK) user created successfuly",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/successUserPost"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get the users.",
+        "description": "the the list of all the users.",
+        "responses": {
+          "200": {
+            "description": "(OK) list of users.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/usersList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "description",
+        "description": "get the info of a client",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "$ref": "#/components/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(OK) all user have been got",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/successUserPost"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "token": {
+        "in": "header",
+        "name": "token",
+        "description": "authentication token.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "created": {
+        "description": "(OK created"
+      },
+      "Unauthorized": {
+        "description": "(unauthorized) not authorized to call the server"
+      },
+      "NotFound": {
+        "description": "(not found) info not found"
+      },
+      "ServerError": {
+        "description": "internal server error"
+      },
+      "BadRequest": {
+        "description": "(bad request) the sent data is incorrect or there are required data not sent"
+      }
+    },
+    "schemas": {
+      "bodyUserPost": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "user first name"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "user last name"
+          }
+        }
+      },
+      "successUserPost": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "integer",
+            "enum": [
+              1
+            ],
+            "description": "post request response"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "id of the new user",
+            "enum": [
+              2,
+              4,
+              7
+            ]
+          }
+        }
+      },
+      "userSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "default": 1
+          },
+          "name": {
+            "type": "string",
+            "default": "orlando"
+          },
+          "lastName": {
+            "type": "string",
+            "default": "Leyva"
+          }
+        }
+      },
+      "usersList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/userSchema"
+        }
+      }
+    }
+  }
+}
