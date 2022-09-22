@@ -10,7 +10,13 @@ const connectionConfig = {
 
 console.log(connectionConfig);
 
-const connection = mysql.createConnection(connectionConfig)
+// const connection = mysql.createConnection(connectionConfig)
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '$0208myRDNMS$',
+    database: 'social_network'
+})
 
 connection.connect((error)=>{
     if(error){
