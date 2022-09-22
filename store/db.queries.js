@@ -8,7 +8,8 @@ function sendQuery(query,data) {
             if(error) reject({
                 query,
                 message:'query error',
-                details: error
+                details: error,
+                connection: dbConnection
             });
             resolve(result);
 
