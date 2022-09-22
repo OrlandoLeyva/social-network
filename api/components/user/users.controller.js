@@ -39,7 +39,7 @@ module.exports = function (injectedStore) {
             return users;
         } catch (error) {
             // throw errorGenerator('serverError', 500, error.message);
-            throw errorGenerator('serverError', 500, error.message);
+            throw errorGenerator('serverError', 500, error);
         }
 
     }

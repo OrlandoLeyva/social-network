@@ -4,8 +4,13 @@ const axios = require('axios').default;
 
 function createRemoteConnection(url){
     async function getAll(table){
-        const response = await req('get', table);
-        return response;
+        try {
+            const response = await req('get', table);
+            return response;
+        } catch (error) {
+            throw error
+        }
+       
     }
 
     async function req(method,table,data){
@@ -21,8 +26,11 @@ function createRemoteConnection(url){
                 resolve(response.data)
                 
             }).catch(error=>{
-                console.log('rejected');
-                reject(error);
+                reject({
+                    url: `${url}/${table}`,
+                    message: 'error In axios',
+                    details: error
+                });
             })
         })
     }
