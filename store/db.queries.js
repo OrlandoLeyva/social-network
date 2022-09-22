@@ -5,7 +5,11 @@ const dbConnection = require('./db.connection');
 function sendQuery(query,data) {
     return new Promise((resolve,reject)=>{
         dbConnection.query(query,data,(error,result)=>{
-            if(error) reject(error);
+            if(error) reject({
+                query,
+                message:'query error',
+                details: error
+            });
             resolve(result);
 
         } )
