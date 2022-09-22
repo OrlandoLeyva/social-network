@@ -1,15 +1,19 @@
 {
-    "version": "28.4.1",
+    "version": 2,
     "builds": [
         {
-            "src":"./api/index.js",
-            "user": "@vercel/node"
+            "src": "./api/index.js",
+            "use": "@vercel/node"
         }
     ],
-    "routes":[
+    "routes": [
         {
-            "src":"/(.*)",
-            "dest":"/"
+            "src": "/api/auths(.*)",
+            "dest": "/api/index.js"
+        },
+        {
+            "src": "/api/v1(.*)",
+            "dest": "/api/index.js"
         }
     ]
 }
