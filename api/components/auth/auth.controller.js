@@ -51,8 +51,13 @@ module.exports = function (injectedStore) {
 
     }
 
-    function getAll() {
-        return store.getAll(TABLE)
+    async function getAll() {
+        try {
+            const auths = await db.getAll(TABLE);
+            return auths
+        } catch (error) {
+            throw errorGenerator('serverError', 500, error);
+        }
     }
     
     function get(id){
