@@ -16,7 +16,7 @@ function createRemoteConnection(url){
     async function req(method,table,data){
         return new Promise((resolve,reject)=>{
             axios({
-                url: `http://localhost:8080/${table}`,
+                url: `${url}/${table}`,
                 method,
                 headers:{
                     "Content-Type":"application/json"
