@@ -38,7 +38,8 @@ module.exports = function (injectedStore) {
             const users = await db.getAll(TABLE)
             return users;
         } catch (error) {
-            throw errorGenerator('serverError', 500, error.message);
+            // throw errorGenerator('serverError', 500, error.message);
+            throw errorGenerator('serverError', 500, error);
         }
 
     }
