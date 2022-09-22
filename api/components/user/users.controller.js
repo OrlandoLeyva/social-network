@@ -1,8 +1,8 @@
 // const nanoid = require('nanoid');
 const {errorGenerator} = require('../../../utilities/error.generator');
 const bcrypt = require('bcrypt');
-// const db = require('../../../store/db.queries');
-const db = require('../../../store/remote-db');
+const db = require('../../../store/db.queries');
+// const db = require('../../../store/remote-db');
 
 //db test.
 
